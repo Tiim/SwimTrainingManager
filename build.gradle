@@ -2,12 +2,10 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 version = '0.1'
-
+mainClassName = 'ch.scbirs.trainingmanager.MainWrapper'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-
-mainClassName = 'ch.scbirs.trainingmanager.MainWrapper'
 
 jar {
     manifest {
@@ -16,6 +14,7 @@ jar {
                 'Implementation-Version': version,
                 'provider': 'gradle'
     }
+    from sourceSets.mwrapper.output
 }
 
 sourceSets {
@@ -34,13 +33,10 @@ sourceSets {
 }
 
 compileMwrapperJava {
-    sourceCompatibility = "1.5"
-    targetCompatibility = "1.5"
+    sourceCompatibility = JavaVersion.VERSION_1_5
+    targetCompatibility = JavaVersion.VERSION_1_5
 }
 
-jar {
-    from sourceSets.mwrapper.output
-}
 
 processResources {
     doLast {
