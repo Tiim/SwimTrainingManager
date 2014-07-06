@@ -8,8 +8,6 @@ version = '0.1'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-
-
 mainClassName = 'ch.scbirs.trainingmanager.MainWrapper'
 
 jar {
@@ -45,10 +43,3 @@ jar {
     from sourceSets.mwrapper.output
 }
 
-//repositories {
-//    mavenCentral()
-//}
-//
-//dependencies {
-//    //compile group: 'org.jfxtras', name: 'jfxtras-controls', version: '8.0-r1'
-//}
