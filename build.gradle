@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'application'
-apply plugin: 'webstart'
 
 version = '0.1'
 
@@ -43,13 +42,11 @@ jar {
     from sourceSets.mwrapper.output
 }
 
-webstart {
-    title = "TrainingManager"
-    codebase = "https://dl.dropboxusercontent.com/u/49598155/jnlp/"
-    jnlpHref = "TrainingManager.jnlp"
-    vendor = "scbirs.ch"
-    homepage = "scbirs.ch"
-    appDescription = "Training Management Tool"
+processResources {
+    doLast {
+        def versionfile = new File(destinationDir, 'version.txt')
+        versionfile.write(project.version)
+    }
 }
 
 if (hasProperty('sign_keystore')) {
