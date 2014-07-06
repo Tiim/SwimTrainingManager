@@ -1,0 +1,54 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'webstart'
+
+version = '0.1'
+
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+
+
+mainClassName = 'ch.scbirs.trainingmanager.MainWrapper'
+
+jar {
+    manifest {
+        attributes 'Main-Class': project.mainClassName,
+                'Implementation-Title': 'TrainingManager',
+                'Implementation-Version': version,
+                'provider': 'gradle'
+    }
+}
+
+sourceSets {
+    mwrapper {
+        java {
+            srcDir 'src/main/java'
+            include 'ch/scbirs/trainingmanager/MainWrapper.java'
+        }
+        compileClasspath += main.output
+    }
+    main {
+        java {
+            exclude 'ch/scbirs/trainingmanager/MainWrapper.java'
+        }
+    }
+}
+
+compileMwrapperJava {
+    sourceCompatibility = "1.5"
+    targetCompatibility = "1.5"
+}
+
+jar {
+    from sourceSets.mwrapper.output
+}
+
+//repositories {
+//    mavenCentral()
+//}
+//
+//dependencies {
+//    //compile group: 'org.jfxtras', name: 'jfxtras-controls', version: '8.0-r1'
+//}

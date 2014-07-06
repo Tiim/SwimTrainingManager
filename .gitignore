@@ -1,0 +1,10 @@
+out/
+build/
+.idea/
+.gradle/
+
+gradle.properties
+*.iml
+*.jar
+*.class
+*.keys

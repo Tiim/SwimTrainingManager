@@ -1,0 +1,3 @@
+[submodule "buildSrc/Gradle-JavaWebStart-Plugin"]
+	path = buildSrc/Gradle-JavaWebStart-Plugin
+	url = https://github.com/Tiim/Gradle-JavaWebStart-Plugin.git
