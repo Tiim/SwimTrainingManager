@@ -43,3 +43,24 @@ jar {
     from sourceSets.mwrapper.output
 }
 
+webstart {
+    title = "TrainingManager"
+    codebase = "https://dl.dropboxusercontent.com/u/49598155/jnlp/"
+    jnlpHref = "TrainingManager.jnlp"
+    vendor = "scbirs.ch"
+    homepage = "scbirs.ch"
+    appDescription = "Training Management Tool"
+}
+
+if (hasProperty('sign_keystore')) {
+    jar.doLast {
+        new File('build/signed').mkdirs();
+        ant.signjar(destDir: 'build/signed',
+                jar: archivePath,
+                alias: "ch.scbirs",
+                storetype: "JKS",
+                keystore: sign_keystore,
+                storepass: sign_password,
+                preservelastmodified: "true")
+    }
+}
