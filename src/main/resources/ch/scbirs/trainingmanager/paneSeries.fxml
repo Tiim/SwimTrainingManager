@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ch.scbirs.trainingmanager.controllers.ControllerPaneSeries">
+    <left>
+        <ListView fx:id="listSeries" prefHeight="200.0" prefWidth="200.0"/>
+    </left>
+    <center>
+        <VBox>
+            <HBox>
+                <TextField fx:id="txtSeriesName" promptText="Series Name"/>
+                <Button onAction="#onAddSeriesButton" text="Add"/>
+                <Button onAction="#onRemoveSeriesButton" text="Remove"/>
+            </HBox>
+            <TableView prefHeight="200.0" fx:id="listSeriesParts">
+                <columns>
+                    <!-- TODO: Add more meaningful columns  -->
+                    <!-- TODO: Add ids -->
+                    <TableColumn prefWidth="25" text="#" fx:id="listClmNr"/>
+                    <TableColumn text="Total Distance" fx:id="listClmTotalDistance"/>
+                    <TableColumn text="Repetitions" fx:id="listClmRepetitions"/>
+                    <TableColumn text="Distance" fx:id="listClmDistance"/>
+                    <TableColumn text="Stroke" fx:id="listClmStroke"/>
+                    <TableColumn text="Materials" fx:id="listClmMaterials"/>
+                    <TableColumn text="Notes" fx:id="listClmNotes"/>
+                </columns>
+            </TableView>
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" minWidth="50.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                </rowConstraints>
+                <Label text="Number"/>
+                <TextField promptText="1" fx:id="txtNr" GridPane.columnIndex="1"/>
+                <Label text="Total Distance" GridPane.rowIndex="1"/>
+                <TextField promptText="100" fx:id="txtTotalDistance" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="Repetitions" GridPane.rowIndex="2"/>
+                <TextField promptText="2" fx:id="txtRepetitions" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label text="Distance" GridPane.rowIndex="3"/>
+                <TextField promptText="50" fx:id="txtDistance" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label text="Stroke" GridPane.rowIndex="4"/>
+                <TextField promptText="Free Style" fx:id="txtStroke" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label text="Materials" GridPane.rowIndex="5"/>
+                <TextField promptText="Paddles" fx:id="txtMaterial" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <Label text="Text" GridPane.rowIndex="6"/>
+                <TextField promptText="Active Recovering" fx:id="txtNotes" GridPane.columnIndex="1"
+                           GridPane.rowIndex="6"/>
+
+                <HBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                      GridPane.rowIndex="7">
+                    <Button mnemonicParsing="false" onAction="#onMoveUpButton" text="Move Up"/>
+                    <Button mnemonicParsing="false" onAction="#onMoveDownButton" text="Move Down"/>
+                    <Button mnemonicParsing="false" onAction="#onAddPartButton" text="Add"/>
+                    <Button mnemonicParsing="false" onAction="#onRemovePartButton" text="Remove"/>
+                </HBox>
+            </GridPane>
+        </VBox>
+    </center>
+</BorderPane>

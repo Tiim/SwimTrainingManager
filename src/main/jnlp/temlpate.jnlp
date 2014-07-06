@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.6+" codebase="${codebase}" href="${href}">
+    <information>
+        <title>${title}</title>
+        <vendor>${vendor}</vendor>
+        <icon href="${icon_href}"/>
+        <offline-allowed/>
+        <shortcut online="false" install="true"/>
+    </information>
+    <resources>
+        <!-- Application Resources -->
+        <j2se version="${java_version}" href=
+                "http://java.sun.com/products/autodl/j2se"/>
+        <jar href="${jar_name}"
+             main="true"/>
+    </resources>
+    <application-desc
+            name="${title}"
+            main-class="${main_class}"/>
+    <update check="timeout"/>
+</jnlp>
