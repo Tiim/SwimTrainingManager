@@ -44,3 +44,21 @@ processResources {
     }
 }
 
+task dist(type: Copy, dependsOn: ['build', ':Updater:build']) {
+    from(project.jar.archivePath)
+    //TODO: Add generik solution for this
+    from({project(':Updater').jar.archivePath})
+    if (project.hasProperty('dist_location')) {
+        into dist_location
+    } else {
+        into 'build/dist'
+    }
+    doFirst {
+        destinationDir.mkdirs()
+    }
+    doLast {
+        (new File(destinationDir, "version.txt")).write(project.version)
+        (new File(destinationDir, "updaterVersion.txt")).write(project(':Updater').version)
+    }
+}
+

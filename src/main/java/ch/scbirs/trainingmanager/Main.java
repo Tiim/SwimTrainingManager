@@ -1,5 +1,6 @@
 package ch.scbirs.trainingmanager;
 
+import ch.scbirs.trainingmanager.updater.VersionChecker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +16,13 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         instance = this;
 
+        if (VersionChecker.isNewVersionAvailable()) {
+            System.out.println("New version available!");
+            System.out.println(VersionChecker.getRemoteVersion());
+        }
 
         paneTraining = FXMLLoader.load(getClass().getResource("paneTraining.fxml"));
         paneSeries = FXMLLoader.load(getClass().getResource("paneSeries.fxml"));

@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+version = '0.1'
+
+ext.mainClassName = "com.github.tiim.updater.UpdaterMain"
+
+jar {
+    manifest {
+        attributes 'Main-Class': project.ext.mainClassName,
+                'Implementation-Title': 'TrainingManager',
+                'Implementation-Version': version,
+                'provider': 'gradle'
+    }
+}
