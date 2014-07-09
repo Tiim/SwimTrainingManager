@@ -1,8 +1,7 @@
 apply plugin: 'java'
-apply plugin: 'application'
 
-version = '0.0.1'
-mainClassName = 'ch.scbirs.trainingmanager.MainWrapper'
+version = 'v0.0.1-11'
+ext.mainClassName = 'ch.scbirs.trainingmanager.MainWrapper'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -24,7 +23,7 @@ sourceSets {
 
 jar {
     manifest {
-        attributes 'Main-Class': project.mainClassName,
+        attributes 'Main-Class': project.ext.mainClassName,
                 'Implementation-Title': 'TrainingManager',
                 'Implementation-Version': version,
                 'provider': 'gradle'
@@ -45,15 +44,3 @@ processResources {
     }
 }
 
-/*if (hasProperty('sign_keystore')) {
-    jar.doLast {
-        new File('build/signed').mkdirs();
-        ant.signjar(destDir: 'build/signed',
-                jar: archivePath,
-                alias: "ch.scbirs",
-                storetype: "JKS",
-                keystore: sign_keystore,
-                storepass: sign_password,
-                preservelastmodified: "true")
-    }
-}*/
