@@ -1,9 +1,7 @@
 package com.github.tiim.updater;
 
 import javax.swing.*;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -12,6 +10,10 @@ import java.net.URLConnection;
  * 1 - Wrong argument count
  * 2 - Download error
  * 3 - Execution error
+ * <p>
+ * Arguments:
+ * Download url
+ * Execution command
  *
  * @author Tim
  * @since 07 - 2014
@@ -22,6 +24,7 @@ public class UpdaterMain {
             abort("Couldn't download the updated version. Please do it manually.\n" +
                     "Error Code: 1");
         }
+        JOptionPane.showMessageDialog(null, "Updater", "sdf", JOptionPane.WARNING_MESSAGE);
         System.out.println(System.getProperty("user.dir"));
         String url = args[0];
         String exec = args[1];
@@ -29,9 +32,11 @@ public class UpdaterMain {
         try {
             download(url);
         } catch (IOException e) {
+            StringWriter w = new StringWriter();
+            e.printStackTrace(new PrintWriter(w));
             abort("Couldn't download the updated version. Please do it manually.\n" +
                     "Error Code: 2\n" +
-                    e.getMessage());
+                    w.toString());
             e.printStackTrace();
         }
 
