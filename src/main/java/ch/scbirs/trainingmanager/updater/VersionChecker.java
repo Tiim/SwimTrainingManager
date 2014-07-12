@@ -17,19 +17,10 @@ public class VersionChecker {
         if (currentVersion != null) {
             return currentVersion;
         }
-        InputStream is = VersionChecker.class.getResourceAsStream("/version.txt");
-        if (is != null) {
-            Reader r = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(r);
-            try {
-                currentVersion = new Version(br.readLine());
-            } catch (IOException | IllegalArgumentException e) {
-                System.err.println("Could not read version");
-                System.err.println(e);
-                currentVersion = new Version();
-            }
+        final String version = VersionChecker.class.getPackage().getImplementationVersion();
+        if (version != null) {
+            currentVersion = new Version(version);
         } else {
-            System.err.println("Could not find version file");
             currentVersion = new Version();
         }
         return currentVersion;
@@ -68,6 +59,8 @@ public class VersionChecker {
     public static boolean isNewVersionAvailable() {
         Version current = getCurrentVersion();
         Version remote = getRemoteVersion();
-        return current.compareTo(remote) < 0;
+
+        return !(current.isDevBuild() || remote.isDevBuild()) && current.compareTo(remote) < 0;
+
     }
 }

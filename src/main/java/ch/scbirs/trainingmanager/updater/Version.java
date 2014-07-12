@@ -66,4 +66,8 @@ public class Version implements Comparable {
         }
         return 0;
     }
+
+    public boolean isDevBuild() {
+        return major == 0 && minor == 0 && patch == 0 && buildNr == 0;
+    }
 }
