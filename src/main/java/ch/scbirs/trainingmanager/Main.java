@@ -15,7 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -47,8 +51,12 @@ public class Main extends Application {
         /// Initialize splash screen
         final ImageView splashImage = new ImageView(new Image(Main.class.getResourceAsStream("splash-pool-text.png")));
         final Label label = new Label();
+        final Label versionLabel = new Label("Version: " + VersionChecker.getCurrentVersion());
+        final StackPane stackPane = new StackPane(splashImage, versionLabel);
         label.textProperty().bind(taskRunner.messageProperty());
-        splash = new VBox(splashImage, label);
+        versionLabel.setFont(Font.font("Arial Black", FontWeight.EXTRA_BOLD, 20));
+        versionLabel.setTextFill(Color.ORANGE);
+        splash = new VBox(stackPane, label);
     }
 
     @Override
