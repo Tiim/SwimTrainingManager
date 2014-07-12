@@ -61,7 +61,7 @@ public class ControllerPaneSeries {
 
 
     ///// Normal Class Variables
-    private ObservableList<SeriesPart> seriesParts = FXCollections.observableArrayList();
+    private final ObservableList<SeriesPart> seriesParts = FXCollections.observableArrayList();
 
 
     @FXML
@@ -80,34 +80,34 @@ public class ControllerPaneSeries {
                 onSelectSeries(newValue));
     }
 
-    private void onSelectSeries(Series newValue) {
+    private void onSelectSeries(final Series newValue) {
 
     }
 
     @FXML
-    private void onAddSeriesButton(ActionEvent event) {
+    private void onAddSeriesButton(final ActionEvent event) {
 
     }
 
     @FXML
-    private void onRemoveSeriesButton(ActionEvent event) {
+    private void onRemoveSeriesButton(final ActionEvent event) {
 
     }
 
     @FXML
-    private void onMoveUpButton(ActionEvent event) {
+    private void onMoveUpButton(final ActionEvent event) {
 
     }
 
     @FXML
-    private void onMoveDownButton(ActionEvent event) {
+    private void onMoveDownButton(final ActionEvent event) {
 
     }
 
     @FXML
-    private void onAddPartButton(ActionEvent event) {
+    private void onAddPartButton(final ActionEvent event) {
         //TODO: Error checking (parsable ints etc)
-        SeriesPart p = new SeriesPart();
+        final SeriesPart p = new SeriesPart();
         p.setNr(Integer.parseInt(txtNr.getText()));
         p.setDistance(Integer.parseInt(txtDistance.getText()));
         p.setMaterials(txtMaterial.getText());
@@ -119,7 +119,7 @@ public class ControllerPaneSeries {
     }
 
     @FXML
-    private void onRemovePartButton(ActionEvent event) {
+    private void onRemovePartButton(final ActionEvent event) {
 
     }
 }

@@ -1,5 +1,7 @@
 package ch.scbirs.trainingmanager.updater;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,19 +22,19 @@ public class Version implements Comparable {
         System.err.println("assuming v0.0.0");
     }
 
-    public Version(int major, int minor, int patch) {
+    public Version(final int major, final int minor, final int patch) {
         this.major = major;
         this.minor = minor;
         this.patch = patch;
     }
 
-    public Version(String v) {
+    public Version(final String v) {
         if (v.equalsIgnoreCase("DevBuild")) {
             this.major = 0;
             this.minor = 0;
             this.patch = 0;
         } else {
-            Matcher m = VERSION_PATTERN.matcher(v);
+            final Matcher m = VERSION_PATTERN.matcher(v);
             if (!m.matches()) {
                 throw new IllegalArgumentException("Version '" + v + " must match the version regexp");
             }
@@ -45,17 +47,17 @@ public class Version implements Comparable {
 
     @Override
     public String toString() {
-        if (!isDevBuild())
+        if (isDeployed())
             return String.format("v%d.%d.%d", major, minor, patch);
         else return "DevBuild";
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(final @NotNull Object o) {
         if (!(o instanceof Version)) {
             return 0;
         }
-        Version v = (Version) o;
+        final Version v = (Version) o;
         //Just in case
         if (v.major != major) {
             return (major - v.major) * 1000;
@@ -69,7 +71,7 @@ public class Version implements Comparable {
         return 0;
     }
 
-    public boolean isDevBuild() {
-        return major == 0 && minor == 0 && patch == 0;
+    public boolean isDeployed() {
+        return patch != 0 || minor != 0 || major != 0;
     }
 }

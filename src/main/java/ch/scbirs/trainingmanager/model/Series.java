@@ -14,20 +14,20 @@ import java.util.List;
 public class Series {
 
     public static class SeriesPart {
-        private SimpleIntegerProperty nr = new SimpleIntegerProperty();
-        private SimpleIntegerProperty totalDistance = new SimpleIntegerProperty();
-        private SimpleIntegerProperty repetitions = new SimpleIntegerProperty();
-        private SimpleIntegerProperty distance = new SimpleIntegerProperty();
+        private final SimpleIntegerProperty nr = new SimpleIntegerProperty();
+        private final SimpleIntegerProperty totalDistance = new SimpleIntegerProperty();
+        private final SimpleIntegerProperty repetitions = new SimpleIntegerProperty();
+        private final SimpleIntegerProperty distance = new SimpleIntegerProperty();
         //TODO: Change stroke form String to Stroke
-        private SimpleStringProperty stroke = new SimpleStringProperty();
-        private SimpleStringProperty materials = new SimpleStringProperty();
-        private SimpleStringProperty notes = new SimpleStringProperty();
+        private final SimpleStringProperty stroke = new SimpleStringProperty();
+        private final SimpleStringProperty materials = new SimpleStringProperty();
+        private final SimpleStringProperty notes = new SimpleStringProperty();
 
         public int getTotalDistance() {
             return totalDistance.get();
         }
 
-        public void setTotalDistance(int totalDistance) {
+        public void setTotalDistance(final int totalDistance) {
             this.totalDistance.set(totalDistance);
         }
 
@@ -35,7 +35,7 @@ public class Series {
             return repetitions.get();
         }
 
-        public void setRepetitions(int repetitions) {
+        public void setRepetitions(final int repetitions) {
             this.repetitions.set(repetitions);
         }
 
@@ -43,7 +43,7 @@ public class Series {
             return distance.get();
         }
 
-        public void setDistance(int distance) {
+        public void setDistance(final int distance) {
             this.distance.set(distance);
         }
 
@@ -51,7 +51,7 @@ public class Series {
             return stroke.get();
         }
 
-        public void setStroke(String stroke) {
+        public void setStroke(final String stroke) {
             this.stroke.set(stroke);
         }
 
@@ -59,7 +59,7 @@ public class Series {
             return materials.get();
         }
 
-        public void setMaterials(String materials) {
+        public void setMaterials(final String materials) {
             this.materials.set(materials);
         }
 
@@ -67,7 +67,7 @@ public class Series {
             return notes.get();
         }
 
-        public void setNotes(String notes) {
+        public void setNotes(final String notes) {
             this.notes.set(notes);
         }
 
@@ -75,18 +75,18 @@ public class Series {
             return nr.get();
         }
 
-        public void setNr(int nr) {
+        public void setNr(final int nr) {
             this.nr.set(nr);
         }
     }
 
-    public List<SeriesPart> seriesParts;
+    private List<SeriesPart> seriesParts;
 
     public Series() {
 
     }
 
-    public Series(SeriesPart... s) {
+    public Series(final SeriesPart... s) {
         seriesParts = new ArrayList<>();
         seriesParts.addAll(Arrays.asList(s));
     }

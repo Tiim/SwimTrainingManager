@@ -32,7 +32,7 @@ public class Main extends Application {
 
     public static Main instance;
 
-    public TaskRunner taskRunner = new TaskRunner();
+    public final TaskRunner taskRunner = new TaskRunner();
 
     public Parent paneTraining;
     public Parent paneSeries;
@@ -93,8 +93,8 @@ public class Main extends Application {
             if (action == Dialog.Actions.YES) {
                 taskRunner.addTasks(() -> new UpdatePerformer().run());
             }
-        } catch (NoClassDefFoundError e) {
-            System.out.println(e);
+        } catch (final NoClassDefFoundError e) {
+            e.printStackTrace();
             taskRunner.addTasks(() -> new UpdatePerformer().run());
         }
     }

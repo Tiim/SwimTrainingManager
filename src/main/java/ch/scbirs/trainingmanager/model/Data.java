@@ -17,7 +17,7 @@ public class Data {
     private Data() {
     }
 
-    private ObservableList<Series> series = FXCollections.observableArrayList();
+    private final ObservableList<Series> series = FXCollections.observableArrayList();
 
     public ObservableList<Series> getSeries() {
         return series;

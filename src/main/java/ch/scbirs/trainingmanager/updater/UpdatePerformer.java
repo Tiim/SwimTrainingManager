@@ -19,7 +19,7 @@ public class UpdatePerformer implements Runnable {
                 updateUpdater();
             }
             launchUpdater();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
         System.exit(0);

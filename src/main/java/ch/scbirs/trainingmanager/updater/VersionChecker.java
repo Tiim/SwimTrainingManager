@@ -9,7 +9,7 @@ import java.io.*;
  * @author Tim
  * @since 07 - 2014
  */
-public class VersionChecker {
+public final class VersionChecker {
     private static Version currentVersion = null;
     private static Version remoteVersion = null;
 
@@ -38,7 +38,7 @@ public class VersionChecker {
         Version v;
         try {
             v = new Version(Utils.downloadString(Constants.REMOTE_PROGRAM_VERSION_URL));
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
             v = new Version();
         }
@@ -47,20 +47,20 @@ public class VersionChecker {
 
     public static boolean isNewUpdaterVersionAvailable() {
         try {
-            Version remote = new Version(Utils.downloadString(Constants.REMOTE_UPDATER_VERSION_URL));
-            Version local = new Version(Utils.readString(Constants.LOCAL_UPDATER_VERSION_URL));
+            final Version remote = new Version(Utils.downloadString(Constants.REMOTE_UPDATER_VERSION_URL));
+            final Version local = new Version(Utils.readString(Constants.LOCAL_UPDATER_VERSION_URL));
             return local.compareTo(remote) < 0;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
         return true;
     }
 
     public static boolean isNewVersionAvailable() {
-        Version current = getCurrentVersion();
-        Version remote = getRemoteVersion();
+        final Version current = getCurrentVersion();
+        final Version remote = getRemoteVersion();
 
-        return !(current.isDevBuild() || remote.isDevBuild()) && current.compareTo(remote) < 0;
+        return !(!current.isDeployed() || !remote.isDeployed()) && current.compareTo(remote) < 0;
 
     }
 }

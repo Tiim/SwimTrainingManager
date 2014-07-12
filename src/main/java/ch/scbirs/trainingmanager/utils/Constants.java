@@ -4,7 +4,7 @@ package ch.scbirs.trainingmanager.utils;
  * @author Tim
  * @since 07 - 2014
  */
-public class Constants {
+public final class Constants {
 
     public static final String REMOTE_LOCATION = "https://dl.dropboxusercontent.com/u/49598155/sm";
     public static final String REMOTE_PROGRAM_VERSION_URL = REMOTE_LOCATION + "/version.txt";

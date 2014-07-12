@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToolBar;
 
-import java.io.IOException;
-
 public class ControllerStage {
 
     @FXML
@@ -20,7 +18,7 @@ public class ControllerStage {
 
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
         tabTraining.setContent(Main.instance.paneTraining);
         tabSeries.setContent(Main.instance.paneSeries);
     }
