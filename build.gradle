@@ -2,8 +2,7 @@ apply plugin: 'java'
 
 
 ext.mainClassName = 'ch.scbirs.trainingmanager.MainWrapper'
-ext.versionInfo = getVersionFromGit()
-version = 'v0.0.1-11' // versionInfo["Version"]
+version = getVersionFromGit()
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -88,3 +87,26 @@ task dist(type: Copy, dependsOn: ['build', ':Updater:build', 'zipDeps']) {
     }
 }
 
+def getVersionFromGit() {
+    def versionString = "git describe --tags --long".execute().text.trim()
+    if (versionString.startsWith("fatal")) {
+        println versionString
+        versionString = "v0.0.0-fatal_git_error"
+    }
+    def pattern = ~/(\d+)\.(\d+)-(\d+)-(.*)/
+    def major = 0
+    def minor = 0
+    def patch = 0
+    def gitHash = "fatal_git_error"
+    def buildNumber = System.getenv("BUILD_NUMBER") ?: "0"
+
+    if (versionString ==~ pattern) {
+        def matcher = versionString =~ pattern
+        major = matcher[0][1]
+        minor = matcher[0][2]
+        patch = matcher[0][3]
+        gitHash = matcher[0][4]
+    }
+
+    return "v${major}.${minor}.${patch}-${buildNumber}"
+}
