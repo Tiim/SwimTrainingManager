@@ -51,13 +51,6 @@ compileMwrapperJava {
     targetCompatibility = JavaVersion.VERSION_1_5
 }
 
-processResources {
-    doLast {
-        def versionfile = new File(destinationDir, 'version.txt')
-        versionfile.write(project.version)
-    }
-}
-
 task zipDeps(type: Zip, dependsOn: 'build') {
     from({ project.configurations.runtime })
     from({ project.jar.archivePath })
