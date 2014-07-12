@@ -2,6 +2,7 @@ package ch.scbirs.trainingmanager;
 
 import ch.scbirs.trainingmanager.updater.UpdateCheckTask;
 import ch.scbirs.trainingmanager.updater.UpdatePerformer;
+import ch.scbirs.trainingmanager.updater.VersionChecker;
 import ch.scbirs.trainingmanager.utils.Lang;
 import ch.scbirs.trainingmanager.utils.TaskRunner;
 import javafx.animation.FadeTransition;
@@ -72,6 +73,7 @@ public class Main extends Application {
                     primaryStage.show();
                     splashStage.toFront();
                     versionCheck();
+                    primaryStage.setTitle(Lang.WINDOW_TITLE + " - " + VersionChecker.getCurrentVersion());
                 }));
 
         taskRunner.start();
