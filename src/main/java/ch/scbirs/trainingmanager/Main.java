@@ -45,7 +45,7 @@ public class Main extends Application {
         instance = this;
 
         /// Initialize splash screen
-        final ImageView splashImage = new ImageView(new Image(Main.class.getResourceAsStream("splash-screen.png")));
+        final ImageView splashImage = new ImageView(new Image(Main.class.getResourceAsStream("splash-pool-text.png")));
         final Label label = new Label();
         label.textProperty().bind(taskRunner.messageProperty());
         splash = new VBox(splashImage, label);

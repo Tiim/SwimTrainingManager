@@ -27,19 +27,27 @@ public class Version implements Comparable {
     }
 
     public Version(String v) {
-        Matcher m = VERSION_PATTERN.matcher(v);
-        if (!m.matches()) {
-            throw new IllegalArgumentException("Version '" + v + " must match the version regexp");
+        if (v.equalsIgnoreCase("DevBuild")) {
+            this.major = 0;
+            this.minor = 0;
+            this.patch = 0;
+        } else {
+            Matcher m = VERSION_PATTERN.matcher(v);
+            if (!m.matches()) {
+                throw new IllegalArgumentException("Version '" + v + " must match the version regexp");
+            }
+            this.major = Integer.parseInt(m.group(1));
+            this.minor = Integer.parseInt(m.group(2));
+            this.patch = Integer.parseInt(m.group(3));
         }
-        this.major = Integer.parseInt(m.group(1));
-        this.minor = Integer.parseInt(m.group(2));
-        this.patch = Integer.parseInt(m.group(3));
     }
 
 
     @Override
     public String toString() {
-        return String.format("v%d.%d.%d", major, minor, patch);
+        if (!isDevBuild())
+            return String.format("v%d.%d.%d", major, minor, patch);
+        else return "DevBuild";
     }
 
     @Override
