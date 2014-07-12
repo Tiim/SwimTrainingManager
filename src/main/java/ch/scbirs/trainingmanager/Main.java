@@ -72,7 +72,9 @@ public class Main extends Application {
                     trans.play();
                     primaryStage.show();
                     splashStage.toFront();
-                    versionCheck();
+                    if (VersionChecker.isNewVersionAvailable()) {
+                        versionCheck();
+                    }
                     primaryStage.setTitle(Lang.WINDOW_TITLE + " - " + VersionChecker.getCurrentVersion());
                 }));
 
@@ -80,14 +82,19 @@ public class Main extends Application {
     }
 
     private void versionCheck() {
-        final Action action = Dialogs.create()
-                .owner(root)
-                .title("Version")
-                .masthead("A new version is available.")
-                .message("Do you want the program to update?\n" +
-                        "If so, it has to restart itself.")
-                .showConfirm();
-        if (action == Dialog.Actions.YES) {
+        try {
+            final Action action = Dialogs.create()
+                    .owner(root)
+                    .title("Version")
+                    .masthead("A new version is available.")
+                    .message("Do you want the program to update?\n" +
+                            "If so, it has to restart itself.")
+                    .showConfirm();
+            if (action == Dialog.Actions.YES) {
+                taskRunner.addTasks(() -> new UpdatePerformer().run());
+            }
+        } catch (NoClassDefFoundError e) {
+            System.out.println(e);
             taskRunner.addTasks(() -> new UpdatePerformer().run());
         }
     }

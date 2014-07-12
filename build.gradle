@@ -91,7 +91,6 @@ def getVersionFromGit() {
     def minor = 0
     def patch = 0
     def gitHash = "fatal_git_error"
-    def buildNumber = System.getenv("BUILD_NUMBER") ?: "0"
 
     if (versionString ==~ pattern) {
         def matcher = versionString =~ pattern
@@ -101,5 +100,5 @@ def getVersionFromGit() {
         gitHash = matcher[0][4]
     }
 
-    return "v${major}.${minor}.${patch}-${buildNumber}"
+    return "v${major}.${minor}.${patch}"
 }
