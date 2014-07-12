@@ -1,7 +1,5 @@
 package ch.scbirs.trainingmanager.updater;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,7 +51,7 @@ public class Version implements Comparable {
     }
 
     @Override
-    public int compareTo(final @NotNull Object o) {
+    public int compareTo(final Object o) {
         if (!(o instanceof Version)) {
             return 0;
         }
