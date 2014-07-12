@@ -1,7 +1,9 @@
 apply plugin: 'java'
 
-version = 'v0.0.1-11'
+
 ext.mainClassName = 'ch.scbirs.trainingmanager.MainWrapper'
+ext.versionInfo = getVersionFromGit()
+version = 'v0.0.1-11' // versionInfo["Version"]
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -30,11 +32,16 @@ sourceSets {
 }
 
 jar {
-    manifest {
-        attributes 'Main-Class': project.ext.mainClassName,
-                'Implementation-Title': 'TrainingManager',
-                'Implementation-Version': version,
-                'provider': 'gradle'
+    doFirst {
+        manifest {
+            attributes([
+                    'Manifest-Version'      : "1.0",
+                    'Main-Class'            : project.ext.mainClassName,
+                    'Class-Path'            : configurations.compile.collect { it.getName() }.join(' '),
+                    'Implementation-Title'  : 'TrainingManager',
+                    'Implementation-Version': version
+            ])
+        }
     }
     from sourceSets.mwrapper.output
     archiveName = baseName + "." + extension
@@ -45,7 +52,6 @@ compileMwrapperJava {
     targetCompatibility = JavaVersion.VERSION_1_5
 }
 
-
 processResources {
     doLast {
         def versionfile = new File(destinationDir, 'version.txt')
@@ -53,10 +59,21 @@ processResources {
     }
 }
 
-task dist(type: Copy, dependsOn: ['build', ':Updater:build']) {
-    from(project.jar.archivePath)
-    //TODO: Add generik solution for this
+task zipDeps(type: Zip, dependsOn: 'build') {
+    from({ project.configurations.runtime })
+    from({ project.jar.archivePath })
+    subprojects.each {
+        if (it.name != 'Updater') {
+            from({ it.jar.archivePath })
+        }
+    }
+    destinationDir = file('build')
+    archiveName = 'dist.zip'
+}
+
+task dist(type: Copy, dependsOn: ['build', ':Updater:build', 'zipDeps']) {
     from({ project(':Updater').jar.archivePath })
+    from({ project.zipDeps.archivePath })
     if (project.hasProperty('dist_location')) {
         into dist_location
     } else {
