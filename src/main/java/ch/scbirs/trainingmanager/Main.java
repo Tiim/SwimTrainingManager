@@ -70,7 +70,7 @@ public class Main extends Application {
 
         showMainStage(primaryStage);
 
-        final FadeTransition trans = new FadeTransition(Duration.seconds(3), splash);
+        final FadeTransition trans = new FadeTransition(Duration.seconds(1.5), splash);
         trans.setFromValue(1);
         trans.setToValue(0);
         trans.setOnFinished((t) -> splashStage.close());
