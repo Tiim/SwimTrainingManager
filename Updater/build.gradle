@@ -1,6 +1,6 @@
 apply plugin: 'java'
 
-version = 'v0.0.1'
+version = 'v0.0.2'
 
 ext.mainClassName = "com.github.tiim.updater.UpdaterMain"
 
