@@ -80,6 +80,12 @@ task dist(type: Copy, dependsOn: ['build', ':Updater:build', 'zipDeps']) {
     }
 }
 
+jar {
+    outputs.upToDateWhen {
+        !gradle.taskGraph.hasTask(dist)
+    }
+}
+
 def getVersionFromGit() {
     def versionString = "git describe --tags --long".execute().text.trim()
     if (versionString.startsWith("fatal")) {

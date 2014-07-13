@@ -1,6 +1,5 @@
 package com.github.tiim.updater;
 
-import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
