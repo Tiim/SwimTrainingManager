@@ -1,0 +1,11 @@
+.Spinner {
+
+}
+
+.Spinner .increment  {
+    -fx-graphic: url('ArrowR.png')
+}
+
+.Spinner .decrement {
+    -fx-graphic: url('ArrowL.png')
+}
