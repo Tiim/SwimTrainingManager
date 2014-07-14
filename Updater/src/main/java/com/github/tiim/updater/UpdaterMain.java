@@ -84,7 +84,8 @@ public final class UpdaterMain {
                     final String zipFileName = e.getName();
                     final File zipNewFile = new File(outputFolder, zipFileName);
                     dialog.message("Extracting " + zipFileName + " to " + zipNewFile);
-                    if (!new File(zipNewFile.getParent()).mkdirs()) {
+                    final File parent = new File(zipNewFile.getParent());
+                    if (!parent.equals(outputFolder) && parent.mkdirs()) {
                         dialog.message("Could not make folder " + zipNewFile.getParent());
                     }
                     try (FileOutputStream fos = new FileOutputStream(zipNewFile)) {
