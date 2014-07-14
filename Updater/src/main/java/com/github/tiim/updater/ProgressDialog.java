@@ -1,7 +1,7 @@
 package com.github.tiim.updater;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class ProgressDialog extends JPanel {
 

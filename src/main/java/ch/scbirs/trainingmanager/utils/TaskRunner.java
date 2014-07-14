@@ -17,7 +17,6 @@ public class TaskRunner extends Thread {
     private final LinkedBlockingQueue<Runnable> tasks = new LinkedBlockingQueue<>();
 
 
-
     public TaskRunner() {
         super("Task Runner");
         setDaemon(true);
@@ -32,17 +31,17 @@ public class TaskRunner extends Thread {
         try {
             while (!isInterrupted()) {
                 final Runnable t = tasks.take();
-                    if (t instanceof Task) {
-                        Platform.runLater(() -> message.bind(((Task) t).messageProperty()));
-                    }
-                    try {
-                        t.run();
-                    } catch (final Exception e) {
-                        e.printStackTrace();
-                    }
-                    if (t instanceof Task) {
-                        Platform.runLater(message::unbind);
-                    }
+                if (t instanceof Task) {
+                    Platform.runLater(() -> message.bind(((Task) t).messageProperty()));
+                }
+                try {
+                    t.run();
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+                if (t instanceof Task) {
+                    Platform.runLater(message::unbind);
+                }
             }
         } catch (final InterruptedException ignored) {
         }

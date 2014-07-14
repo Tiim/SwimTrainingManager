@@ -3,7 +3,7 @@ package ch.scbirs.trainingmanager.updater;
 import ch.scbirs.trainingmanager.utils.Constants;
 import ch.scbirs.trainingmanager.utils.Utils;
 
-import java.io.*;
+import java.io.IOException;
 
 /**
  * @author Tim

@@ -8,6 +8,7 @@ public final class Lang {
 
     public static final String WINDOW_TITLE = "Training Manager";
 
-    private Lang() {}
+    private Lang() {
+    }
 
 }

@@ -23,6 +23,8 @@ import static ch.scbirs.trainingmanager.model.Series.SeriesPart;
 @SuppressWarnings("unused")
 public class ControllerPaneSeries {
 
+    ///// Normal Class Variables
+    private final ObservableList<SeriesPart> seriesParts = FXCollections.observableArrayList();
     ///// Table View Columns
     @FXML
     private TableColumn<SeriesPart, Integer> listClmNr;
@@ -38,7 +40,6 @@ public class ControllerPaneSeries {
     private TableColumn<SeriesPart, String> listClmMaterials;
     @FXML
     private TableColumn<SeriesPart, String> listClmNotes;
-
     ///// Other Controls
     @FXML
     private TableView<SeriesPart> listSeriesParts;
@@ -60,11 +61,6 @@ public class ControllerPaneSeries {
     private TextField txtMaterial;
     @FXML
     private TextField txtNotes;
-
-
-    ///// Normal Class Variables
-    private final ObservableList<SeriesPart> seriesParts = FXCollections.observableArrayList();
-
 
     @FXML
     @SuppressWarnings("unchecked")

@@ -29,20 +29,30 @@ import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 
+import javax.swing.*;
+
 public class Main extends Application {
 
+    public static final TaskRunner taskRunner = new TaskRunner();
     private static final int SPLASH_WIDTH = 620;
     private static final int SPLASH_HEIGHT = 350;
-
     public static Main instance;
-
-    public final TaskRunner taskRunner = new TaskRunner();
-
     public Parent paneTraining;
     public Parent paneSeries;
     public Parent root;
 
     private Parent splash;
+
+    public static void main(final String[] args) {
+        try {
+            Class.forName("org.controlsfx.dialog.Dialogs");
+        } catch (final ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Application not correctly installed, updater will correct that.",
+                    "Invalid Install", JOptionPane.ERROR_MESSAGE);
+            new UpdatePerformer().run();
+        }
+        launch(args);
+    }
 
     @Override
     public void init() throws Exception {
@@ -90,20 +100,16 @@ public class Main extends Application {
     }
 
     private void versionCheck() {
-        try {
-            final Action action = Dialogs.create()
-                    .owner(root)
-                    .title("Version")
-                    .masthead("A new version is available.")
-                    .message("Do you want the program to update?\n" +
-                                    "If so, it has to restart itself.\n" +
-                                    VersionChecker.getCurrentVersion() + " --> " + VersionChecker.getRemoteVersion()
-                    ).showConfirm();
-            if (action == Dialog.Actions.YES) {
-                taskRunner.addTasks(() -> new UpdatePerformer().run());
-            }
-        } catch (final NoClassDefFoundError e) {
-            e.printStackTrace();
+        final Action action = Dialogs.create()
+                .owner(root)
+                .title("Version")
+                .masthead("A new version is available.")
+                .message("Do you want the program to update?\n" +
+                                "If so, it has to restart itself.\n" +
+                                "This Version: " + VersionChecker.getCurrentVersion() +
+                                " New Version: " + VersionChecker.getRemoteVersion()
+                ).showConfirm();
+        if (action == Dialog.Actions.YES) {
             taskRunner.addTasks(() -> new UpdatePerformer().run());
         }
     }
@@ -130,9 +136,5 @@ public class Main extends Application {
         stage.setScene(new Scene(root));
         stage.setMinHeight(600);
         stage.setMinWidth(800);
-    }
-
-    public static void main(final String[] args) {
-        launch(args);
     }
 }

@@ -13,6 +13,17 @@ import java.util.List;
  */
 public class Series {
 
+    private List<SeriesPart> seriesParts;
+
+    public Series() {
+
+    }
+
+    public Series(final SeriesPart... s) {
+        seriesParts = new ArrayList<>();
+        seriesParts.addAll(Arrays.asList(s));
+    }
+
     public static class SeriesPart {
         private final SimpleIntegerProperty nr = new SimpleIntegerProperty();
         private final SimpleIntegerProperty totalDistance = new SimpleIntegerProperty();
@@ -78,17 +89,6 @@ public class Series {
         public void setNr(final int nr) {
             this.nr.set(nr);
         }
-    }
-
-    private List<SeriesPart> seriesParts;
-
-    public Series() {
-
-    }
-
-    public Series(final SeriesPart... s) {
-        seriesParts = new ArrayList<>();
-        seriesParts.addAll(Arrays.asList(s));
     }
 
 }

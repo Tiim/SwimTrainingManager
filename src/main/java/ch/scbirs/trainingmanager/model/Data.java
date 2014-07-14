@@ -9,15 +9,14 @@ import javafx.collections.ObservableList;
  */
 public class Data {
     private static final Data INSTANCE = new Data();
-
-    public static Data getInstance() {
-        return INSTANCE;
-    }
+    private final ObservableList<Series> series = FXCollections.observableArrayList();
 
     private Data() {
     }
 
-    private final ObservableList<Series> series = FXCollections.observableArrayList();
+    public static Data getInstance() {
+        return INSTANCE;
+    }
 
     public ObservableList<Series> getSeries() {
         return series;

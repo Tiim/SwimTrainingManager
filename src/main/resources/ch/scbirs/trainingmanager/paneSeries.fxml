@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import ch.scbirs.trainingmanager.uicontrols.Spinner?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import ch.scbirs.trainingmanager.uicontrols.Spinner?>
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
             fx:controller="ch.scbirs.trainingmanager.controllers.ControllerPaneSeries">
     <left>
         <ListView fx:id="listSeries" prefHeight="200.0" prefWidth="200.0"/>
