@@ -96,8 +96,9 @@ public class Main extends Application {
                     .title("Version")
                     .masthead("A new version is available.")
                     .message("Do you want the program to update?\n" +
-                            "If so, it has to restart itself.")
-                    .showConfirm();
+                                    "If so, it has to restart itself.\n" +
+                                    VersionChecker.getCurrentVersion() + " --> " + VersionChecker.getRemoteVersion()
+                    ).showConfirm();
             if (action == Dialog.Actions.YES) {
                 taskRunner.addTasks(() -> new UpdatePerformer().run());
             }
