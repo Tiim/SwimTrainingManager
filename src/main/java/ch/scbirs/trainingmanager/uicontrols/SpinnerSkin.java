@@ -1,13 +1,10 @@
 package ch.scbirs.trainingmanager.uicontrols;
 
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 
 /**
  * @author Tim
@@ -33,12 +30,6 @@ public class SpinnerSkin extends SkinBase<Spinner> {
         buttonIncrement.getStyleClass().addAll("button", "increment");
         buttonDecrement.getStyleClass().addAll("button", "decrement");
 
-//        final BorderPane border = new BorderPane();
-//
-//        border.setLeft(buttonDecrement);
-//        border.setCenter(textField);
-//        border.setRight(buttonIncrement);
-//
         final HBox hbox = new HBox(buttonDecrement, textField, buttonIncrement);
         HBox.setHgrow(textField, Priority.ALWAYS);
         control.valueProperty().addListener((observable, oldV, newV) ->
@@ -47,7 +38,6 @@ public class SpinnerSkin extends SkinBase<Spinner> {
         buttonIncrement.setOnMouseClicked((event) -> control.increment());
         buttonDecrement.setOnMouseClicked((event) -> control.decrement());
 
-//        getChildren().add(border);
         getChildren().add(hbox);
         control.setOnScroll((event) -> control.change(event.getDeltaY()));
 

@@ -17,7 +17,7 @@ public class Version implements Comparable {
 
     public Version() {
         this(0, 0, 0);
-        System.err.println("assuming v0.0.0");
+        System.out.println("DevBuild --> v0.0.0");
     }
 
     public Version(final int major, final int minor, final int patch) {

@@ -2,11 +2,7 @@ package ch.scbirs.trainingmanager.uicontrols;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.control.Button;
 import javafx.scene.control.Control;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Region;
 
 /**
  * @author Tim
@@ -47,8 +43,6 @@ public class Spinner extends Control {
     void decrement() {
         value.set(value.get() - incrementAmount.get());
     }
-
-    ////// GETTER SETTER
 
     public double getValue() {
         return value.get();
