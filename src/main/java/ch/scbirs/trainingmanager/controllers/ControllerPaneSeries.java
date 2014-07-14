@@ -3,6 +3,7 @@ package ch.scbirs.trainingmanager.controllers;
 import ch.scbirs.trainingmanager.model.Data;
 import ch.scbirs.trainingmanager.model.Series;
 import ch.scbirs.trainingmanager.uicontrols.Spinner;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -66,6 +67,7 @@ public class ControllerPaneSeries {
 
 
     @FXML
+    @SuppressWarnings("unchecked")
     private void initialize() {
         listClmNr.setCellValueFactory(new PropertyValueFactory<>("nr"));
         listClmTotalDistance.setCellValueFactory(new PropertyValueFactory<>("totalDistance"));
@@ -79,6 +81,9 @@ public class ControllerPaneSeries {
         listSeriesParts.setItems(seriesParts);
         listSeries.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
                 onSelectSeries(newValue));
+
+        listSeriesParts.getSelectionModel().selectedItemProperty().addListener((event) ->
+                selectSeriesPart(((ReadOnlyObjectProperty<SeriesPart>) event).get()));
     }
 
     private void onSelectSeries(final Series newValue) {
@@ -116,11 +121,45 @@ public class ControllerPaneSeries {
         p.setRepetitions((int) txtRepetitions.getValue());
         p.setStroke(txtStroke.getText());
         p.setTotalDistance((int) txtTotalDistance.getValue());
-        seriesParts.addAll(p);
+        seriesParts.add(p);
+        listSeriesParts.getSelectionModel().select(seriesParts.indexOf(p));
     }
 
     @FXML
     private void onRemovePartButton(final ActionEvent event) {
 
+    }
+
+    private void selectSeriesPart(final SeriesPart newP) {
+        if (newP == null) {
+            return; //unselected
+        }
+
+        txtNr.setValue(newP.getNr());
+        txtDistance.setValue(newP.getDistance());
+        txtMaterial.setText(newP.getMaterials());
+        txtNotes.setText(newP.getNotes());
+        txtRepetitions.setValue(newP.getRepetitions());
+        txtStroke.setText(newP.getStroke());
+        txtTotalDistance.setValue(newP.getTotalDistance());
+    }
+
+    @FXML
+    private void onSetButton(final ActionEvent actionEvent) {
+        final SeriesPart selected = listSeriesParts.getSelectionModel().getSelectedItem();
+        final int index = listSeriesParts.getSelectionModel().getSelectedIndex();
+        if (selected == null) {
+            onAddPartButton(actionEvent);
+        } else {
+            selected.setNr((int) txtNr.getValue());
+            selected.setDistance((int) txtDistance.getValue());
+            selected.setMaterials(txtMaterial.getText());
+            selected.setNotes(txtNotes.getText());
+            selected.setRepetitions((int) txtRepetitions.getValue());
+            selected.setStroke(txtStroke.getText());
+            selected.setTotalDistance((int) txtTotalDistance.getValue());
+            seriesParts.set(index, selected);
+            listSeriesParts.getSelectionModel().select(index);
+        }
     }
 }

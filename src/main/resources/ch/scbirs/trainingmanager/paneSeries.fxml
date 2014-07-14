@@ -17,8 +17,6 @@
             </HBox>
             <TableView prefHeight="200.0" fx:id="listSeriesParts">
                 <columns>
-                    <!-- TODO: Add more meaningful columns  -->
-                    <!-- TODO: Add ids -->
                     <TableColumn prefWidth="25" text="#" fx:id="listClmNr"/>
                     <TableColumn text="Total Distance" fx:id="listClmTotalDistance"/>
                     <TableColumn text="Repetitions" fx:id="listClmRepetitions"/>
@@ -46,13 +44,15 @@
                 <Spinner fx:id="txtNr" value="1" GridPane.columnIndex="1"/>
 
                 <Label text="Total Distance" GridPane.rowIndex="1"/>
-                <Spinner fx:id="txtTotalDistance" value="100" incrementAmount="25" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Spinner fx:id="txtTotalDistance" value="100" incrementAmount="25" GridPane.columnIndex="1"
+                         GridPane.rowIndex="1"/>
 
                 <Label text="Repetitions" GridPane.rowIndex="2"/>
                 <Spinner fx:id="txtRepetitions" value="1" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
                 <Label text="Distance" GridPane.rowIndex="3"/>
-                <Spinner fx:id="txtDistance" value="100" incrementAmount="25" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Spinner fx:id="txtDistance" value="100" incrementAmount="25" GridPane.columnIndex="1"
+                         GridPane.rowIndex="3"/>
 
                 <Label text="Stroke" GridPane.rowIndex="4"/>
                 <TextField promptText="Free Style" fx:id="txtStroke" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
@@ -66,6 +66,7 @@
 
                 <HBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
                       GridPane.rowIndex="7">
+                    <Button mnemonicParsing="false" onAction="#onSetButton" text="Set"/>
                     <Button mnemonicParsing="false" onAction="#onMoveUpButton" text="Move Up"/>
                     <Button mnemonicParsing="false" onAction="#onMoveDownButton" text="Move Down"/>
                     <Button mnemonicParsing="false" onAction="#onAddPartButton" text="Add"/>
