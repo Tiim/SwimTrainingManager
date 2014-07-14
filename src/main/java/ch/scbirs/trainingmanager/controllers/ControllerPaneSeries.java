@@ -2,6 +2,7 @@ package ch.scbirs.trainingmanager.controllers;
 
 import ch.scbirs.trainingmanager.model.Data;
 import ch.scbirs.trainingmanager.model.Series;
+import ch.scbirs.trainingmanager.uicontrols.Spinner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,15 +44,15 @@ public class ControllerPaneSeries {
     @FXML
     private ListView<Series> listSeries;
     @FXML
-    private TextField txtNr;
+    private Spinner txtNr;
     @FXML
     private TextField txtSeriesName;
     @FXML
-    private TextField txtTotalDistance;
+    private Spinner txtTotalDistance;
     @FXML
-    private TextField txtRepetitions;
+    private Spinner txtRepetitions;
     @FXML
-    private TextField txtDistance;
+    private Spinner txtDistance;
     @FXML
     private TextField txtStroke;
     @FXML
@@ -108,13 +109,13 @@ public class ControllerPaneSeries {
     private void onAddPartButton(final ActionEvent event) {
         //TODO: Error checking (parsable ints etc)
         final SeriesPart p = new SeriesPart();
-        p.setNr(Integer.parseInt(txtNr.getText()));
-        p.setDistance(Integer.parseInt(txtDistance.getText()));
+        p.setNr((int) txtNr.getValue());
+        p.setDistance((int) txtDistance.getValue());
         p.setMaterials(txtMaterial.getText());
         p.setNotes(txtNotes.getText());
-        p.setRepetitions(Integer.parseInt(txtRepetitions.getText()));
+        p.setRepetitions((int) txtRepetitions.getValue());
         p.setStroke(txtStroke.getText());
-        p.setTotalDistance(Integer.parseInt(txtTotalDistance.getText()));
+        p.setTotalDistance((int) txtTotalDistance.getValue());
         seriesParts.addAll(p);
     }
 

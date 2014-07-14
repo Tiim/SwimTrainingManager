@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import ch.scbirs.trainingmanager.uicontrols.Spinner?>
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ch.scbirs.trainingmanager.controllers.ControllerPaneSeries">
     <left>
@@ -42,17 +43,23 @@
                     <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 </rowConstraints>
                 <Label text="Number"/>
-                <TextField promptText="1" fx:id="txtNr" GridPane.columnIndex="1"/>
+                <Spinner fx:id="txtNr" value="1" GridPane.columnIndex="1"/>
+
                 <Label text="Total Distance" GridPane.rowIndex="1"/>
-                <TextField promptText="100" fx:id="txtTotalDistance" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Spinner fx:id="txtTotalDistance" value="100" incrementAmount="25" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
                 <Label text="Repetitions" GridPane.rowIndex="2"/>
-                <TextField promptText="2" fx:id="txtRepetitions" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Spinner fx:id="txtRepetitions" value="1" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
                 <Label text="Distance" GridPane.rowIndex="3"/>
-                <TextField promptText="50" fx:id="txtDistance" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Spinner fx:id="txtDistance" value="100" incrementAmount="25" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
                 <Label text="Stroke" GridPane.rowIndex="4"/>
                 <TextField promptText="Free Style" fx:id="txtStroke" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
                 <Label text="Materials" GridPane.rowIndex="5"/>
                 <TextField promptText="Paddles" fx:id="txtMaterial" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
                 <Label text="Text" GridPane.rowIndex="6"/>
                 <TextField promptText="Active Recovering" fx:id="txtNotes" GridPane.columnIndex="1"
                            GridPane.rowIndex="6"/>

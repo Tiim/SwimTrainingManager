@@ -51,6 +51,6 @@ public class SpinnerSkin extends SkinBase<Spinner> {
         getChildren().add(hbox);
         control.setOnScroll((event) -> control.change(event.getDeltaY()));
 
-
+        textField.setText(Double.toString(control.getValue()));
     }
 }
