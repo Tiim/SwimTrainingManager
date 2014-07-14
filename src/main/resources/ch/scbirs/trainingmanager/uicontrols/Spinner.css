@@ -1,6 +1,9 @@
 .Spinner {
     -fx-skin: "ch.scbirs.trainingmanager.uicontrols.SpinnerSkin";
-    /*-fx-background: red*/
+}
+
+.Spinner:invalid .text {
+    -fx-border-color: red;
 }
 
 .Spinner .increment  {

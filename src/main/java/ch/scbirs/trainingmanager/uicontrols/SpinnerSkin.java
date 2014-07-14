@@ -1,5 +1,6 @@
 package ch.scbirs.trainingmanager.uicontrols;
 
+import javafx.css.PseudoClass;
 import javafx.scene.control.Button;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.TextField;
@@ -11,6 +12,9 @@ import javafx.scene.layout.Priority;
  * @since 07 - 2014
  */
 public class SpinnerSkin extends SkinBase<Spinner> {
+
+    private static final PseudoClass INVALID_DATA_PSEUDO_CLASS =
+            PseudoClass.getPseudoClass("invalid");
 
     /**
      * Constructor for all SkinBase instances.
@@ -42,5 +46,9 @@ public class SpinnerSkin extends SkinBase<Spinner> {
         control.setOnScroll((event) -> control.change(event.getDeltaY()));
 
         textField.setText(Double.toString(control.getValue()));
+
+        control.invalidData.addListener((event) ->
+                pseudoClassStateChanged(INVALID_DATA_PSEUDO_CLASS, control.isInvalidData()));
+
     }
 }

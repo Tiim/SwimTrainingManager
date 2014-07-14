@@ -1,6 +1,8 @@
 package ch.scbirs.trainingmanager.uicontrols;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.Control;
 
@@ -12,6 +14,7 @@ public class Spinner extends Control {
 
     final DoubleProperty value = new SimpleDoubleProperty(0);
     final DoubleProperty incrementAmount = new SimpleDoubleProperty(1);
+    final BooleanProperty invalidData = new SimpleBooleanProperty(false);
 
     public Spinner(final double startVal, final double inc) {
         this();
@@ -22,9 +25,6 @@ public class Spinner extends Control {
     public Spinner() {
         getStylesheets().add(getClass().getResource("Spinner.css").toExternalForm());
         getStyleClass().add("Spinner");
-
-
-
     }
 
     void change(final double direction) {
@@ -33,7 +33,14 @@ public class Spinner extends Control {
     }
 
     void update(final String str) {
-        value.set(Double.parseDouble(str));
+        try {
+            value.set(Double.parseDouble(str));
+            if (invalidData.get()) {
+                invalidData.set(false);
+            }
+        } catch (final NumberFormatException e) {
+            invalidData.set(true);
+        }
     }
 
     void increment() {
@@ -68,4 +75,15 @@ public class Spinner extends Control {
         return incrementAmount;
     }
 
+    public boolean isInvalidData() {
+        return invalidData.get();
+    }
+
+    public void setInvalidData(final boolean b) {
+        invalidData.set(b);
+    }
+
+    public BooleanProperty invalidDataProperty() {
+        return invalidData;
+    }
 }
