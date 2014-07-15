@@ -79,7 +79,7 @@ public class ControllerPaneSeries {
                 onSelectSeries(newValue));
 
         listSeriesParts.getSelectionModel().selectedItemProperty().addListener((event) ->
-                selectSeriesPart(((ReadOnlyObjectProperty<SeriesPart>) event).get()));
+                onSelectSeriesPart(((ReadOnlyObjectProperty<SeriesPart>) event).get()));
     }
 
     private void onSelectSeries(final Series newValue) {
@@ -98,17 +98,38 @@ public class ControllerPaneSeries {
 
     @FXML
     private void onMoveUpButton(final ActionEvent event) {
-
+        final SeriesPart p = listSeriesParts.getSelectionModel().getSelectedItem();
+        if (p == null) {
+            return;
+        }
+        final int index = listSeriesParts.getSelectionModel().getSelectedIndex();
+        if (index <= 0) {
+            return;
+        }
+        final SeriesPart pUp = listSeriesParts.getItems().get(index - 1);
+        listSeriesParts.getItems().set(index - 1, p);
+        listSeriesParts.getItems().set(index, pUp);
+        listSeriesParts.getSelectionModel().select(index - 1);
     }
 
     @FXML
     private void onMoveDownButton(final ActionEvent event) {
-
+        final SeriesPart p = listSeriesParts.getSelectionModel().getSelectedItem();
+        if (p == null) {
+            return;
+        }
+        final int index = listSeriesParts.getSelectionModel().getSelectedIndex();
+        if (index >= listSeriesParts.getItems().size() - 1) {
+            return;
+        }
+        final SeriesPart pUp = listSeriesParts.getItems().get(index + 1);
+        listSeriesParts.getItems().set(index + 1, p);
+        listSeriesParts.getItems().set(index, pUp);
+        listSeriesParts.getSelectionModel().select(index + 1);
     }
 
     @FXML
     private void onAddPartButton(final ActionEvent event) {
-        //TODO: Error checking (parsable ints etc)
         final SeriesPart p = new SeriesPart();
         p.setNr((int) txtNr.getValue());
         p.setDistance((int) txtDistance.getValue());
@@ -126,7 +147,7 @@ public class ControllerPaneSeries {
 
     }
 
-    private void selectSeriesPart(final SeriesPart newP) {
+    private void onSelectSeriesPart(final SeriesPart newP) {
         if (newP == null) {
             return; //unselected
         }
