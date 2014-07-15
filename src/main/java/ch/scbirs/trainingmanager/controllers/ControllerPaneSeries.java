@@ -58,7 +58,7 @@ public class ControllerPaneSeries {
     @FXML
     private TextField txtStroke;
     @FXML
-    private TextField txtMaterial;
+    private TextField txtMaterials;
     @FXML
     private TextField txtNotes;
 
@@ -133,7 +133,7 @@ public class ControllerPaneSeries {
         final SeriesPart p = new SeriesPart();
         p.setNr((int) txtNr.getValue());
         p.setDistance((int) txtDistance.getValue());
-        p.setMaterials(txtMaterial.getText());
+        p.setMaterials(txtMaterials.getText());
         p.setNotes(txtNotes.getText());
         p.setRepetitions((int) txtRepetitions.getValue());
         p.setStroke(txtStroke.getText());
@@ -154,7 +154,7 @@ public class ControllerPaneSeries {
 
         txtNr.setValue(newP.getNr());
         txtDistance.setValue(newP.getDistance());
-        txtMaterial.setText(newP.getMaterials());
+        txtMaterials.setText(newP.getMaterials());
         txtNotes.setText(newP.getNotes());
         txtRepetitions.setValue(newP.getRepetitions());
         txtStroke.setText(newP.getStroke());
@@ -170,7 +170,7 @@ public class ControllerPaneSeries {
         } else {
             selected.setNr((int) txtNr.getValue());
             selected.setDistance((int) txtDistance.getValue());
-            selected.setMaterials(txtMaterial.getText());
+            selected.setMaterials(txtMaterials.getText());
             selected.setNotes(txtNotes.getText());
             selected.setRepetitions((int) txtRepetitions.getValue());
             selected.setStroke(txtStroke.getText());

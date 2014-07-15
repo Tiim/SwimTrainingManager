@@ -11,9 +11,9 @@
     </top>
     <center>
         <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-            <Tab fx:id="tabTraining" text="Training">
+            <Tab fx:id="tabTraining" text="%ui.main.tab.Training">
             </Tab>
-            <Tab fx:id="tabSeries" text="Series">
+            <Tab fx:id="tabSeries" text="%ui.main.tab.Series">
             </Tab>
         </TabPane>
     </center>

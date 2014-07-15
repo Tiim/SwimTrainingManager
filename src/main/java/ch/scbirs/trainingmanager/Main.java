@@ -5,6 +5,8 @@ import ch.scbirs.trainingmanager.updater.UpdatePerformer;
 import ch.scbirs.trainingmanager.updater.VersionChecker;
 import ch.scbirs.trainingmanager.utils.Lang;
 import ch.scbirs.trainingmanager.utils.TaskRunner;
+import ch.scbirs.trainingmanager.utils.lang.LoadTranslationTask;
+import ch.scbirs.trainingmanager.utils.lang.Translation;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -30,6 +32,7 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -37,6 +40,9 @@ public class Main extends Application {
     private static final int SPLASH_WIDTH = 620;
     private static final int SPLASH_HEIGHT = 350;
     public static Main instance;
+
+    public Translation translation;
+
     public Parent paneTraining;
     public Parent paneSeries;
     public Parent root;
@@ -74,27 +80,38 @@ public class Main extends Application {
         final Stage splashStage = new Stage(StageStyle.UNDECORATED);
         showSplash(splashStage, primaryStage);
 
-        paneTraining = FXMLLoader.load(getClass().getResource("paneTraining.fxml"));
-        paneSeries = FXMLLoader.load(getClass().getResource("paneSeries.fxml"));
-        root = FXMLLoader.load(getClass().getResource("stage.fxml"));
-
-        showMainStage(primaryStage);
-
         final FadeTransition trans = new FadeTransition(Duration.seconds(1.5), splash);
         trans.setFromValue(1);
-        trans.setToValue(0);
-        trans.setOnFinished((t) -> splashStage.close());
+        trans.setToValue(0.5);
+        trans.setOnFinished((t) -> {
+            splashStage.close();
+            primaryStage.show();
+            primaryStage.toFront();
+        });
 
-        taskRunner.addTasks(new UpdateCheckTask(),
-                () -> Platform.runLater(() -> {
-                    trans.play();
-                    primaryStage.show();
-                    splashStage.toFront();
-                    if (VersionChecker.isNewVersionAvailable()) {
-                        versionCheck();
-                    }
-                    primaryStage.setTitle(Lang.WINDOW_TITLE + " - " + VersionChecker.getCurrentVersion());
-                }));
+
+        final Runnable loadingFinished = () -> Platform.runLater(() -> {
+            trans.play();
+            primaryStage.setTitle(Lang.WINDOW_TITLE + " - " + VersionChecker.getCurrentVersion());
+            if (VersionChecker.isNewVersionAvailable()) {
+                versionCheck();
+            }
+            try {
+                paneTraining = FXMLLoader.load(getClass().getResource("paneTraining.fxml"), translation);
+                paneSeries = FXMLLoader.load(getClass().getResource("paneSeries.fxml"), translation);
+                root = FXMLLoader.load(getClass().getResource("stage.fxml"), translation);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            showMainStage(primaryStage);
+        });
+
+
+        taskRunner.addTasks(
+                new LoadTranslationTask(this),
+                new UpdateCheckTask(),
+                loadingFinished
+        );
 
         taskRunner.start();
     }

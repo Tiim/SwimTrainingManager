@@ -12,18 +12,18 @@
         <VBox>
             <HBox>
                 <TextField fx:id="txtSeriesName" promptText="Series Name"/>
-                <Button onAction="#onAddSeriesButton" text="Add"/>
-                <Button onAction="#onRemoveSeriesButton" text="Remove"/>
+                <Button onAction="#onAddSeriesButton" text="%ui.main.training.button.Add"/>
+                <Button onAction="#onRemoveSeriesButton" text="%ui.main.training.button.Remove"/>
             </HBox>
             <TableView prefHeight="200.0" fx:id="listSeriesParts">
                 <columns>
-                    <TableColumn prefWidth="25" text="#" fx:id="listClmNr"/>
-                    <TableColumn text="Total Distance" fx:id="listClmTotalDistance"/>
-                    <TableColumn text="Repetitions" fx:id="listClmRepetitions"/>
-                    <TableColumn text="Distance" fx:id="listClmDistance"/>
-                    <TableColumn text="Stroke" fx:id="listClmStroke"/>
-                    <TableColumn text="Materials" fx:id="listClmMaterials"/>
-                    <TableColumn text="Notes" fx:id="listClmNotes"/>
+                    <TableColumn prefWidth="25" text="%ui.main.training.list.Nr" fx:id="listClmNr"/>
+                    <TableColumn text="%ui.main.training.list.Total_Distance" fx:id="listClmTotalDistance"/>
+                    <TableColumn text="%ui.main.training.list.Repetitions" fx:id="listClmRepetitions"/>
+                    <TableColumn text="%ui.main.training.list.Distance" fx:id="listClmDistance"/>
+                    <TableColumn text="%ui.main.training.list.Stroke" fx:id="listClmStroke"/>
+                    <TableColumn text="%ui.main.training.list.Materials" fx:id="listClmMaterials"/>
+                    <TableColumn text="%ui.main.training.list.Notes" fx:id="listClmNotes"/>
                 </columns>
             </TableView>
             <GridPane>
@@ -40,37 +40,41 @@
                     <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 </rowConstraints>
-                <Label text="Number"/>
+                <Label text="%ui.main.training.label.Number"/>
                 <Spinner fx:id="txtNr" value="1" GridPane.columnIndex="1"/>
 
-                <Label text="Total Distance" GridPane.rowIndex="1"/>
+                <Label text="%ui.main.training.label.Total_Distance" GridPane.rowIndex="1"/>
                 <Spinner fx:id="txtTotalDistance" value="100" incrementAmount="25" GridPane.columnIndex="1"
                          GridPane.rowIndex="1"/>
 
-                <Label text="Repetitions" GridPane.rowIndex="2"/>
+                <Label text="%ui.main.training.label.Repetitions" GridPane.rowIndex="2"/>
                 <Spinner fx:id="txtRepetitions" value="1" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-                <Label text="Distance" GridPane.rowIndex="3"/>
+                <Label text="%ui.main.training.label.Distance" GridPane.rowIndex="3"/>
                 <Spinner fx:id="txtDistance" value="100" incrementAmount="25" GridPane.columnIndex="1"
                          GridPane.rowIndex="3"/>
 
-                <Label text="Stroke" GridPane.rowIndex="4"/>
-                <TextField promptText="Free Style" fx:id="txtStroke" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label text="%ui.main.training.label.Stroke" GridPane.rowIndex="4"/>
+                <TextField promptText="%ui.main.training.prompt.Stroke" fx:id="txtStroke" GridPane.columnIndex="1"
+                           GridPane.rowIndex="4"/>
 
-                <Label text="Materials" GridPane.rowIndex="5"/>
-                <TextField promptText="Paddles" fx:id="txtMaterial" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <Label text="%ui.main.training.label.Materials" GridPane.rowIndex="5"/>
+                <TextField promptText="%ui.main.training.prompt.Materials" fx:id="txtMaterials" GridPane.columnIndex="1"
+                           GridPane.rowIndex="5"/>
 
-                <Label text="Text" GridPane.rowIndex="6"/>
-                <TextField promptText="Active Recovering" fx:id="txtNotes" GridPane.columnIndex="1"
+                <Label text="%ui.main.training.label.Text" GridPane.rowIndex="6"/>
+                <TextField promptText="%ui.main.training.prompt.Text" fx:id="txtNotes" GridPane.columnIndex="1"
                            GridPane.rowIndex="6"/>
 
                 <HBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
                       GridPane.rowIndex="7">
-                    <Button mnemonicParsing="false" onAction="#onSetButton" text="Set"/>
-                    <Button mnemonicParsing="false" onAction="#onMoveUpButton" text="Move Up"/>
-                    <Button mnemonicParsing="false" onAction="#onMoveDownButton" text="Move Down"/>
-                    <Button mnemonicParsing="false" onAction="#onAddPartButton" text="Add"/>
-                    <Button mnemonicParsing="false" onAction="#onRemovePartButton" text="Remove"/>
+                    <Button mnemonicParsing="false" onAction="#onSetButton" text="%ui.main.training.button.Set"/>
+                    <Button mnemonicParsing="false" onAction="#onMoveUpButton" text="%ui.main.training.button.MvUp"/>
+                    <Button mnemonicParsing="false" onAction="#onMoveDownButton"
+                            text="%ui.main.training.button.MvDown"/>
+                    <Button mnemonicParsing="false" onAction="#onAddPartButton" text="%ui.main.training.button.Add"/>
+                    <Button mnemonicParsing="false" onAction="#onRemovePartButton"
+                            text="%ui.main.training.button.Remove"/>
                 </HBox>
             </GridPane>
         </VBox>
