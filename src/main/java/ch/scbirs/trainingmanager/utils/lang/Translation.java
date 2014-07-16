@@ -38,4 +38,8 @@ public class Translation extends ResourceBundle {
     public Enumeration<String> getKeys() {
         return (Enumeration) props.keys();
     }
+
+    public String getFormatted(final String key, final Object... args) {
+        return String.format(getString(key), args);
+    }
 }

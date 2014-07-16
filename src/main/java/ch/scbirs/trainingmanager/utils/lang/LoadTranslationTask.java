@@ -19,6 +19,7 @@ public class LoadTranslationTask extends Task<Void> {
     protected Void call() throws Exception {
         updateMessage("Loading language");
         main.translation = new Translation();
+        updateMessage(main.translation.getString("ui.message.splash.lang.LoadingDone"));
         return null;
     }
 }

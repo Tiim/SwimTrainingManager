@@ -3,6 +3,7 @@ package ch.scbirs.trainingmanager;
 import ch.scbirs.trainingmanager.updater.UpdateCheckTask;
 import ch.scbirs.trainingmanager.updater.UpdatePerformer;
 import ch.scbirs.trainingmanager.updater.VersionChecker;
+import ch.scbirs.trainingmanager.utils.ClasspathCheckTask;
 import ch.scbirs.trainingmanager.utils.Lang;
 import ch.scbirs.trainingmanager.utils.TaskRunner;
 import ch.scbirs.trainingmanager.utils.lang.LoadTranslationTask;
@@ -31,7 +32,6 @@ import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -50,13 +50,6 @@ public class Main extends Application {
     private Parent splash;
 
     public static void main(final String[] args) {
-        try {
-            Class.forName("org.controlsfx.dialog.Dialogs");
-        } catch (final ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Application not correctly installed, updater will correct that.",
-                    "Invalid Install", JOptionPane.ERROR_MESSAGE);
-            new UpdatePerformer().run();
-        }
         launch(args);
     }
 
@@ -109,6 +102,7 @@ public class Main extends Application {
 
         taskRunner.addTasks(
                 new LoadTranslationTask(this),
+                new ClasspathCheckTask(),
                 new UpdateCheckTask(),
                 loadingFinished
         );
@@ -119,12 +113,12 @@ public class Main extends Application {
     private void versionCheck() {
         final Action action = Dialogs.create()
                 .owner(root)
-                .title("Version")
-                .masthead("A new version is available.")
-                .message("Do you want the program to update?\n" +
-                                "If so, it has to restart itself.\n" +
-                                "This Version: " + VersionChecker.getCurrentVersion() +
-                                " New Version: " + VersionChecker.getRemoteVersion()
+                .title(translation.getString("ui.message.error.title.ClasspathInvalid"))
+                .masthead(translation.getString("ui.message.error.masthead.ClasspathInvalid"))
+                .message(translation.getFormatted("ui.message.error.ClasspathInvalid",
+                                VersionChecker.getCurrentVersion(),
+                                VersionChecker.getRemoteVersion()
+                        )
                 ).showConfirm();
         if (action == Dialog.Actions.YES) {
             taskRunner.addTasks(() -> new UpdatePerformer().run());
