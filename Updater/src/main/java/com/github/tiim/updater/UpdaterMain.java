@@ -53,9 +53,11 @@ public final class UpdaterMain {
         try {
             execute(exec);
         } catch (final IOException e) {
+            final StringWriter w = new StringWriter();
+            e.printStackTrace(new PrintWriter(w));
             dialog.message("Couldn't restart the updated version. Please do it manually.\n" +
                     "Error Code: 3\n" +
-                    e.getMessage());
+                    w.toString());
             e.printStackTrace();
         }
         dialog.setProgress(100);
