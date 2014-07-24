@@ -3,9 +3,7 @@ package ch.scbirs.trainingmanager;
 import ch.scbirs.trainingmanager.updater.UpdateCheckTask;
 import ch.scbirs.trainingmanager.updater.UpdatePerformer;
 import ch.scbirs.trainingmanager.updater.VersionChecker;
-import ch.scbirs.trainingmanager.utils.ClasspathCheckTask;
-import ch.scbirs.trainingmanager.utils.Lang;
-import ch.scbirs.trainingmanager.utils.TaskRunner;
+import ch.scbirs.trainingmanager.utils.*;
 import ch.scbirs.trainingmanager.utils.lang.LoadTranslationTask;
 import ch.scbirs.trainingmanager.utils.lang.Translation;
 import javafx.animation.FadeTransition;
@@ -37,11 +35,14 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static final TaskRunner taskRunner = new TaskRunner();
+    public static final String SETTINGS_FILE = "settings.properties";
     private static final int SPLASH_WIDTH = 620;
     private static final int SPLASH_HEIGHT = 350;
     public static Main instance;
 
     public Translation translation;
+    public Settings settings;
+
 
     public Parent paneTraining;
     public Parent paneSeries;
@@ -102,6 +103,7 @@ public class Main extends Application {
 
         taskRunner.addTasks(
                 new LoadTranslationTask(this),
+                new SettingsLoadTask(),
                 new ClasspathCheckTask(),
                 new UpdateCheckTask(),
                 loadingFinished
@@ -127,7 +129,7 @@ public class Main extends Application {
 
     @Override
     public void stop() throws Exception {
-
+        settings.save();
     }
 
     private void showSplash(final Stage stage, final Stage owner) {
